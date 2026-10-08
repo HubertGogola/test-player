@@ -1,9 +1,8 @@
-"""
-Dynamic Player DNA -- entry point and navigation router.
+"""Dynamic Player DNA — entrypoint and always-visible navigation.
 
-This file intentionally contains no page content of its own (besides
-global chrome). Each page lives in `pages/` as a plain script; this file
-only sets global configuration and defines navigation order and grouping.
+The public application's navigation deliberately uses explicit page links
+instead of Streamlit's collapsible built-in sidebar. This preserves the
+three requested groups and never renders a View more / View less control.
 """
 
 import sys
@@ -24,8 +23,9 @@ st.set_page_config(
 )
 
 theme.inject_css()
-components.sidebar_chrome()
 
+# Keep the information architecture consistent with the research workflow.
+# Page objects are shared by the router and the fully-visible custom menu.
 pages = {
     "Start": [
         st.Page("pages/overview.py", title="Overview", default=True),
@@ -41,7 +41,19 @@ pages = {
     ],
 }
 
-nav = st.navigation(pages)
-nav.run()
+# Hidden router keeps valid page URLs and active page highlighting, while
+# explicit links avoid Streamlit 1.38's View more / View less truncation.
+current_page = st.navigation(pages, position="hidden")
+
+components.sidebar_chrome()
+with st.sidebar:
+    for group, entries in pages.items():
+        st.markdown(
+            f'<div class="dp-nav-group">{group}</div>',
+            unsafe_allow_html=True,
+        )
+        for page in entries:
+            st.page_link(page, label=page.title, use_container_width=True)
 
 components.sidebar_footer_note()
+current_page.run()

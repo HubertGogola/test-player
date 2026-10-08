@@ -24,6 +24,7 @@ TEST_MODULES = [
     "tests.test_survival_analysis",
     "tests.test_privacy",
     "tests.test_comparison_options",
+    "tests.test_navigation",
 ]
 
 

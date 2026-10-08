@@ -21,7 +21,13 @@ DATA_PATH = "data/synthetic_player_data.csv"
 
 
 def page_header(eyebrow: str, title: str, subtitle: str = "", badges: list[str] | None = None):
-    st.markdown(f'<div class="eyebrow">{eyebrow}</div>', unsafe_allow_html=True)
+    # Reserve vertical room below Streamlit's fixed toolbar to keep the eyebrow visible.
+    # A real spacer element is more reliable here than tweaking margin on the title.
+    st.markdown(
+        f'<div aria-hidden="true" style="height: 2.25rem;"></div>'
+        f'<div class="eyebrow">{eyebrow}</div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(f'<div class="app-title" style="font-size:2.1rem;">{title}</div>', unsafe_allow_html=True)
     if subtitle:
         st.markdown(f'<div class="app-subtitle">{subtitle}</div>', unsafe_allow_html=True)

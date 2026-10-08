@@ -58,7 +58,7 @@ def inject_css():
     font-family: {FONT_STACK};
 }}
 .block-container {{
-    padding-top: 2.2rem;
+    padding-top: 2.8rem;
     padding-bottom: 3.5rem;
     max-width: 1500px;
 }}
@@ -67,21 +67,25 @@ def inject_css():
     border-right: 1px solid {BORDER};
     scroll-padding-top: 3rem;
 }}
-[data-testid="stSidebarNav"] {{
-    /* Extra breathing room above the native navigation group headings. */
-    padding-top: 3.4rem;
-    scroll-padding-top: 2.5rem;
+/* Three fixed navigation groups; all six page links stay visible. */
+.dp-nav-group {{
+    color: #A9B6AD;
+    font-weight: 700;
+    font-size: 0.76rem;
+    letter-spacing: 0.015em;
+    margin: 1.05rem 0 0.25rem 0;
+    padding: 0 0.55rem;
 }}
-[data-testid="stSidebarNav"] ul {{
-    padding-top: 0.7rem;
+[data-testid="stSidebar"] [data-testid="stPageLink"] {{
+    margin-bottom: 0.08rem;
 }}
-[data-testid="stSidebarNav"] li {{
-    scroll-margin-top: 2.5rem;
+[data-testid="stSidebar"] [data-testid="stPageLink"] a {{
+    min-height: 2.05rem;
+    border-radius: 7px;
 }}
-[data-testid="stSidebarNav"] [role="heading"] {{
-    line-height: 1.5;
-    padding-top: 0.35rem;
-    padding-bottom: 0.2rem;
+[data-testid="stSidebar"] [data-testid="stPageLink"] a[aria-current="page"] {{
+    background: rgba(79,157,110,0.15);
+    border-left: 2px solid #4F9D6E;
 }}
 footer {{ visibility: hidden; }}
 #MainMenu {{ visibility: hidden; }}
